@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import EnigmaMachine from "../../algorithm/EnigmaMachine";
 import Rotor from "../../algorithm/Rotor";
 import Plugboard from "../../algorithm/Plugboard";
+import rearrangeArray from "../../algorithm/Helper";
 import { toast } from 'react-toastify';
 import { saveAs } from 'file-saver';
 import 'react-toastify/dist/ReactToastify.css';
@@ -32,10 +33,14 @@ const EncryptionForm = ({ rot1Pos, rot1Order, rot2Pos, rot2Order, rot3Pos, rot3O
         const entryDiskWiring = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X', 'Y', 'Z'];
 
         // Create the Enigma machine with rotor configuration, reflector wiring, and entry disk wiring
-        const rotorConfig = [rotor1, rotor2, rotor3]; // Rotor configuration: rotor 1, rotor 2, rotor 3
+        const rotorInit = [rotor1, rotor2, rotor3]; // Rotor configuration: rotor 1, rotor 2, rotor 3
+        const rotorPos = [rot1Order, rot2Order, rot3Order]; // Rotor configuration
 
         try {
-            // Make aplugboard
+            // Instantiate the rotorConfig
+            let rotorConfig = rearrangeArray(rotorInit, rotorPos);
+            
+            // Make a plugboard
             let plugboard;
             if (enablePb) {
                 plugboard = new Plugboard(pbValue);
