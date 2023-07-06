@@ -1,5 +1,7 @@
 import React, { useState } from "react";
-import { EnigmaMachine, Rotor, Plugboard } from "../../algorithm/enigma";
+import EnigmaMachine from "../../algorithm/EnigmaMachine";
+import Rotor from "../../algorithm/Rotor";
+import Plugboard from "../../algorithm/Plugboard";
 import { toast } from 'react-toastify';
 import { saveAs } from 'file-saver';
 import 'react-toastify/dist/ReactToastify.css';
@@ -39,11 +41,9 @@ const EncryptionForm = ({ rot1Pos, rot1Order, rot2Pos, rot2Order, rot3Pos, rot3O
                 plugboard = new Plugboard(pbValue);
             }
 
-            console.log(plugboard);
+            // Create the enigma and proceed
             const enigmaMachine = new EnigmaMachine(rotorConfig, reflectorWiring, entryDiskWiring, plugboard);
-            console.log(text);
             let finalResult = enigmaMachine.encrypt(text);
-            console.log(finalResult);
             setResult(finalResult);
 
         } catch (err) {
@@ -54,7 +54,6 @@ const EncryptionForm = ({ rot1Pos, rot1Order, rot2Pos, rot2Order, rot3Pos, rot3O
     };
 
     const handleDownload = () => {
-        console.log(result);
         let resultString = ''; // Replace with your desired text content
         for (let i = 0; i < result.process.length; i++) {
             resultString += `Keyboard input: ${result.process[i].initChar}\n`;
