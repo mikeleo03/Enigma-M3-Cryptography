@@ -113,7 +113,6 @@ class Plugboard {
     createWiringMap(wiring) {
         const pairs = wiring.split(' ');
         const wiringMap = {};
-        console.log(pairs);
 
         for (let pair of pairs) {
             const firstChar = pair[0].charCodeAt(0) - 64;
@@ -121,8 +120,6 @@ class Plugboard {
             wiringMap[firstChar] = secondChar;
             wiringMap[secondChar] = firstChar;
         }
-
-        console.log(wiringMap);
 
         return wiringMap;
     }
@@ -155,13 +152,11 @@ class EnigmaMachine {
         const shouldRotateLeftRotor = this.rotors[1].rotateOthers() || this.rotors[0].getAlreadyRotate() === true; // Leftmost rotor rotates when middle rotor completes a full revolution
 
         if (shouldRotateMiddleRotor) {
-            console.log("rotate middle");
             this.rotors[1].rotate();
             this.rotors[1].setAlreadyRotate(true);
         }
 
         if (shouldRotateLeftRotor) {
-            console.log("rotate left");
             this.rotors[0].rotate();
             this.rotors[0].setAlreadyRotate(true);
         }
