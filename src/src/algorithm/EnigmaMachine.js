@@ -18,8 +18,7 @@ class EnigmaMachine {
     // 2. Mekanisme dasar merotasikan rotor
     rotateRotors() {
         const shouldRotateMiddleRotor = this.rotors[2].rotateOthers() || this.rotors[1].getAlreadyRotate() === true; // Middle rotor rotates when rightmost rotor completes a full revolution
-        const shouldRotateLeftRotor = this.rotors[1].rotateOthers() || this.rotors[0].getAlreadyRotate() === true; // Leftmost rotor rotates when middle rotor completes a full revolution
-
+        const shouldRotateLeftRotor = this.rotors[1].rotateOthers();
         if (shouldRotateMiddleRotor) {
             this.rotors[1].rotate();
             this.rotors[1].setAlreadyRotate(true);
